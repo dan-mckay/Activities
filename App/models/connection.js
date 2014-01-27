@@ -1,7 +1,7 @@
 /*
  * Database connection logic - called in app.js
  */
-var credentials = require('../lib/credentials.js');     // This file is not in the repo for security purposes.
+var credentials = require('../config/credentials.js');     // This file is not in the repo for security purposes.
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
