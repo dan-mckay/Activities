@@ -2,6 +2,7 @@
  * Database connection logic - called in app.js
  */
 var credentials = require('../config/credentials.js');     // This file is not in the repo for security purposes.
+//var populate = require('../config/populate.js'); 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -9,16 +10,31 @@ module.exports = function(callback) {
   // Call function to build the connection string using your credentials.
   mongoose.connect(buildConnectString());
 
-  var db = mongoose.connection;
-  db.on('error', function() {
+  var connect = mongoose.connection;
+
+  connect.on('error', function() {
     return callback(error, null);
   });
-  db.once('open', function() {
-    var result = 'Connected to the database'
-    if (db.getCollectionNames().length === 0) {
-       console.log("It's empty");
-   }
-    return callback(null, result);
+
+  connect.once('open', function() {
+    var result = 'Connected to the database';
+    // Check to see if there is a valid collection in the db
+    connect.db.collectionNames(function(error, names) {
+      if(error) {
+        return callback(error, null);
+      }
+      // are there are any collection names returned? 
+      if(names.length != 0) {
+        for (var i = 0; i < names.length; i++) {
+          //check they are not system collections
+          if(names[i].name.indexOf("system") == -1) {
+            result = 'Connected to and populated the database';
+
+          }
+        }
+        return callback(null, result);
+      }
+    });
   });
 }
 
