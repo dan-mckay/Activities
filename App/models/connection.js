@@ -15,6 +15,9 @@ module.exports = function(callback) {
   });
   db.once('open', function() {
     var result = 'Connected to the database'
+    if (db.getCollectionNames().length === 0) {
+       console.log("It's empty");
+   }
     return callback(null, result);
   });
 }
