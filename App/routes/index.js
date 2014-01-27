@@ -1,7 +1,6 @@
 /*
- * Application route definitions.
+ * Route functions.
  */
-
  module.exports = {
   
   index: function(req, res) {

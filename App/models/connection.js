@@ -5,17 +5,18 @@ var credentials = require('../lib/credentials.js');     // This file is not in t
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-module.exports = function() {
+module.exports = function(callback) {
   // Call function to build the connection string using your credentials.
   mongoose.connect(buildConnectString());
 
   var db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error: '));
-  db.once('open', function() {
-    console.log('Connected to the database');
+  db.on('error', function() {
+    return callback(error, null);
   });
-  console.log('function returned');
-  return;
+  db.once('open', function() {
+    var result = 'Connected to the database'
+    return callback(null, result);
+  });
 }
 
 function buildConnectString() {
