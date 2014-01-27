@@ -1,12 +1,14 @@
 
 /**
- * Module dependencies.
+ * Main application configuration and server
  */
 
 var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+//
+var dbConnection = require('./models/connection.js')();
 
 var app = express();
 
