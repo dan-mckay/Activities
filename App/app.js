@@ -49,7 +49,7 @@ function initiateApp() {
   app.get('/activity/:id', routes.activity);
   app.get('/all', routes.allActivities);
 
-  http.createServer(app).listen(app.get('port'), function(){
+  http.createServer(app).listen(app.get('port'), function() {
     console.log('------------------ Express server listening on port ' + app.get('port'));
   });
 
