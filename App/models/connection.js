@@ -2,9 +2,8 @@
  * Database connection and population - called in app.js
  */
 var credentials = require('../config/credentials.js');     // This file is not in the repo for security purposes.
-//var populate = require('../config/populate.js'); 
+var populateDB = require('../config/populate.js'); 
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
 module.exports = function(callback) {
   // Call function to build the connection string using your credentials.
@@ -49,6 +48,11 @@ function buildConnectString() {
 }
 
 function populateDatabase(callback) {
-  
+  populateDB(function(err, res) {
+    if(err) {
+      return callback(err, null);
+    }
+    console.log('res', res);
+  });
   return callback(null, 'Connected to and populated the database');
 }
