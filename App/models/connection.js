@@ -49,5 +49,6 @@ function buildConnectString() {
 }
 
 function populateDatabase(callback) {
+  
   return callback(null, 'Connected to and populated the database');
 }
