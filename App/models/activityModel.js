@@ -5,30 +5,51 @@ var activitySchema = new Schema({
     activityID: Number,
     activityName: String,
     description: String,
-    beginTime: Number,
-    endTime: Number,
+    beginTime: String,
+    beginTimeRaw: Number,
+    endTime: String,
+    endTimeRaw: Number,
     device: String,
     activityParent: String,
     activityType: String,
     eventType: String,
     timeZone: String,
-    maxElevation: Number,
+    maxElevation: String,
+    maxElevationRaw: Number,
     beginLatitude: Number,
     beginLongitude: Number,
     endLatitude: Number,
     endLongitude: Number,
-    aveMovingSpeed: Number,
+    aveMovingSpeed: String,
+    aveMovingSpeedRaw: Number,
     maxHeartRate: Number,
     aveHeartRate: Number,
-    maxSpeed: Number,
-    calories: Number,
-    duration: Number,
-    movingDuration: Number,
-    aveSpeed: Number,
-    distance: Number,
-    minElevation: Number,
-    elevationGain: Number,
-    elevationLoss: Number
+    maxSpeed: String,
+    maxSpeedRaw: Number,
+    calories: String,
+    caloriesRaw: Number,
+    duration: String,
+    durationRaw: Number,
+    movingDuration: String,
+    movingDurationRaw: Number,
+    aveSpeed: String,
+    aveSpeedRaw: Number,
+    distance: String,
+    distanceRaw: Number,
+    maxHeartRateDuplicate: Number,
+    minElevation: String,
+    minElevationRaw: Number,
+    elevationGain: String,
+    elevationGainRaw: Number,
+    elevationLoss: String,
+    elevationLossRaw: Number
 });
  
-module.exports = mongoose.model('Activity', activitySchema);
+module.exports = {
+  createModel: function() {
+    return mongoose.model('Activity', activitySchema);
+  },
+  getSchema: function() {
+    return activitySchema;
+  }
+}

@@ -13,27 +13,26 @@ module.exports = function(callback) {
     return callback(error, null);
   });
 
+  // Open the connection to mongodb database
   connect.once('open', function() {
     var result = 'Connected to the database';
-    // Check to see if there is a valid collection in the db
+    // Get the names of each collection in the database
     connect.db.collectionNames(function(error, names) {
       if(error) {
         return callback(error, null);
       }
-      // are there are any collection names returned? 
-      if(names.length != 0) {
-        for (var i = 0; i < names.length; i++) {
-          //check they are not system collections
-          if(names[i].name.indexOf("system") == -1) {
-            // TODO populate the database from csv file
-            populateDatabase(function(err, res) {
-              result = res;
-            });
-            
+      // If the collection for this application is not present, 
+      // parse the CSV file and populate the database.
+      if(!checkForData(names)) {
+        result = "Connected to and populating the database";
+        populateDB(function(err, res) {
+          if(err) {
+            return callback(err, null);
           }
-        }
-        return callback(null, result);
+          console.log(res) 
+        });
       }
+      return callback(null, result); 
     });
   });
 }
@@ -47,12 +46,12 @@ function buildConnectString() {
   return 'mongodb://' + username + ':' + password + '@' + host + ':' + port + '/' + dbname;
 }
 
-function populateDatabase(callback) {
-  populateDB(function(err, res) {
-    if(err) {
-      return callback(err, null);
+// see if the database collection been created
+function checkForData(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    if(arr[i].name.indexOf('activities.activities') != -1) {
+      return true;
     }
-    console.log('res', res);
-  });
-  return callback(null, 'Connected to and populated the database');
+  }
+  return false;
 }
