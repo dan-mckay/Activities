@@ -4,6 +4,8 @@
 var credentials = require('../config/credentials.js');     // This file is not in the repo for security purposes.
 var populateDB = require('../config/populate.js'); 
 var mongoose = require('mongoose');
+// The name of the collection in our database used for this application
+var APP_COLLECTION = "activities.activities";
 
 module.exports = function(callback) {
   // Call function to build the connection string using your credentials.
@@ -49,7 +51,7 @@ function buildConnectString() {
 // see if the database collection been created
 function checkForData(arr) {
   for (var i = 0; i < arr.length; i++) {
-    if(arr[i].name.indexOf('activities.activities') != -1) {
+    if(arr[i].name.indexOf(APP_COLLECTION) != -1) {
       return true;
     }
   }

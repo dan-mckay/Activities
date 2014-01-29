@@ -1,8 +1,10 @@
 /*
  * Route functions.
  */
- module.exports = {
-  
+var activityModel = require('../models/activityModel').createModel();
+
+module.exports = {
+
   index: function(req, res) {
     res.render('index', { title: 'Index' });
   },
@@ -12,12 +14,16 @@
   },
 
   allActivities: function(req, res) {
-    res.render('index', { title:'All Activities'});
+    activityModel.find(function(err, activities) {
+      res.send(activities);
+    });
   },
 
   activity: function(req, res) {
-    var id = req.params.id;
-    res.render('index', { title: id });
+    activityModel.findOne({ activityID: req.params.id }, function(err, activity) {
+      if(err) res.send(500);
+      res.send(activity);
+    })
   }
 
- }
+}
