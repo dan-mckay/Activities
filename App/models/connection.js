@@ -11,7 +11,7 @@ module.exports = function(callback) {
   // Call function to build the connection string using your credentials.
   mongoose.connect(buildConnectString());
   var connect = mongoose.connection;
-  connect.on('error', function() {
+  connect.on('error', function(error, res) {
     return callback(error, null);
   });
 

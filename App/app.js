@@ -7,6 +7,7 @@ var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+
 // Connect to mongodb
 var dbConnection = require('./models/connection.js');
 
@@ -48,6 +49,7 @@ function initiateApp() {
   app.get('/stats', routes.stats);
   app.get('/activity/:id', routes.activity);
   app.get('/list', routes.allActivities);
+  app.get('/map/:id', routes.map);
 
   http.createServer(app).listen(app.get('port'), function() {
     console.log('------------------ Express server listening on port ' + app.get('port'));

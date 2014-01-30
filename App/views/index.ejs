@@ -1,11 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+    <head>
+        <title>{{ = title }}</title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <div id="activities"></div>
+      
+       
+      <div id="map" style="width: 100%; height: 400px;"></div>
+      <!-- TEMPLATES FOR BACKBONE -->
+      <script type="text/template" id="listitem">
+        <li><a href='/activity/<%= activityID %>'><%= activityName %></a></li>
+      </script>
+      
+      <script type="text/template" id="activitydetails">
+
+        <div class="form-left-col">
+          <h1>HELLO</h1>
+        </div>
+
+        <div class="form-right-col">
+          <img height="300" src="/images/image.png"/>
+          <label>Stats</label>
+          <textarea id="description" name="description">Heres a big fucking description</textarea>
+        </div>
+      </script>
+
+    </body>
+      <script src="/javascripts/loadgpx.js"></script>
+      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+      <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+      <script src="/javascripts/app.js"></script>
+
+      <script>
+        function loadGPXFileIntoGoogleMap(map, filename) {
+          $.ajax({url: filename,
+            dataType: "xml",
+            success: function(data) {
+              var parser = new GPXParser(data, map);
+              parser.setTrackColour("#2a719e");     // Set the track line colour
+              parser.setTrackWidth(5);          // Set the track line width
+              parser.setMinTrackPointDelta(0.001);      // Set the minimum distance between track points
+              parser.centerAndZoom(data);
+              parser.addTrackpointsToMap();         // Add the trackpoints
+              parser.addWaypointsToMap();           // Add the waypoints
+            }
+          });
+        }
+
+        $(document).ready(function() {
+          var mapOptions = {
+            zoom: 8,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          var map = new google.maps.Map(document.getElementById("map"),
+            mapOptions);
+          loadGPXFileIntoGoogleMap(map, "map/148787113");
+        });
+      </script>
+
 </html>
