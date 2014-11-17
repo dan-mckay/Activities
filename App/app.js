@@ -2,9 +2,7 @@
 /**
  * Main application configuration and server
  */
-
 var express = require('express');
-var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 
@@ -45,11 +43,7 @@ function initiateApp() {
   }
 
   // Route definitions
-  app.get('/', routes.index);
-  app.get('/stats', routes.stats);
-  app.get('/activity/:id', routes.activity);
-  app.get('/list', routes.allActivities);
-  app.get('/map/:id', routes.map);
+  var routes = require('./routes')(app);
 
   http.createServer(app).listen(app.get('port'), function() {
     console.log('------------------ Express server listening on port ' + app.get('port'));

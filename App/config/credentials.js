@@ -1,7 +1,7 @@
 var credentials = module.exports = {
-  username: "YOUR_MONGODB_USERNAME",
-  password: "YOUR_MONGODB_PASSWORD",
-  host: "YOUR_MONGODB_HOST",
-  port: "YOUR_MONGODB_PORT",
-  dbname: "YOUR_MONGODB_DATABASE_NAME"
+  username: "dmcaodha",
+  password: "domingo1878",
+  host: "ds063158.mongolab.com",
+  port: "63158",
+  dbname: "activities"
 }
