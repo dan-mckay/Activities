@@ -1,16 +1,19 @@
 /*
  * Route functions.
  */
+var path = require('path')
 var fs = require('fs');
 var activityModel = require('../models/activityModel').createModel();
 var stats = require('../config/stats');
 
 module.exports = function(app) {
 
-  app.get( '/', function(req, res)  {
-    //res.render('index', { title: 'Activities App' });
-    res.sendfile('public/index.html');
-  });
+  // API Routes
+
+  // app.get( '/', function(req, res)  {
+  //   //res.render('index', { title: 'Activities App' });
+  //   res.sendfile('public/index.html');
+  // });
 
   app.get( '/stats', function(req, res)  {
     stats(function(err, result) {
@@ -35,8 +38,14 @@ module.exports = function(app) {
   });
 
   app.get( '/map/:id', function(req, res)  {
-    var filepath = '../Dataset/activity_' + req.params.id + '.gpx';
+    // filepath is relative to the app.js
+    var filepath = './dataset/activity_' + req.params.id + '.gpx';
     fs.createReadStream(filepath).pipe(res);
+  });
+
+  // Front-end Route
+  app.get('*', function(req, res) {
+    res.sendfile('public/index.html'); // load our public/index.html file
   });
 
 }

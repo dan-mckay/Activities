@@ -14,5 +14,5 @@ results
 npm-debug.log
 node_modules
 
-Dataset/*
+dataset/*
 App/config/credentials.js

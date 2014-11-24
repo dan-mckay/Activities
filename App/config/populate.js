@@ -10,7 +10,7 @@ var keys = Object.keys(activityModel.getSchema().paths);
 
 module.exports = function(callback) {
   csv()
-  .from('../Dataset/activities.csv', { 
+  .from('../dataset/activities.csv', { 
     delimiter: ',',
     escape: '"'
   })
@@ -38,4 +38,4 @@ function constructDocumentObject(row) {
     obj[keys[i]] = row[i];
   };
   return obj;
-} 
+}
