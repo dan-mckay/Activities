@@ -17,9 +17,13 @@ module.exports = function(app) {
       "first_name": casual.first_name,
       "last_name": casual.last_name,
       "city": casual.city,
-      "country": casual.country
+      "country": casual.country,
+      "address": casual.address,
+      "url": casual.url,
+      "email": casual.email,
+      "member_since": casual.unix_time
     }
-    res.send(user);
+    res.json(user);
   });
 
   app.get( '/api/stats', function(req, res)  {

@@ -1,19 +1,21 @@
 angular.module('appServices', ['ngResource'])
   .factory('APIBaseUrl', function() {
+    var protocol = 'http'
     var host = '127.0.0.1';
     var port = '3000';
-    return host + ':' + port + '/api';
+    return protocol + '://' + host + ':' + port + '/api';
   })
   .factory('MenuItems', function() {
     return [
-      { name: 'accounts',      icon: '\ud83d\udc65' },
-      { name: 'cases',         icon: '\ud83d\udec6' },
-      { name: 'campaigns',     icon: '\ud83d\udcf0' },
-      { name: 'opportunities', icon: '\ud83c\udfaf' }
+      { name: 'dashboard',      icon: 'fa-area-chart' },
+      { name: 'sports',         icon: 'fa-bicycle'    },
+      { name: 'activities',     icon: 'fa-trophy'     },
+      { name: 'user details',   icon: 'fa-user'       },
+      { name: 'logout',         icon: 'fa-trash'      }
     ];
   })
   .factory('PageTitle', function() {
-    var title = 'Activities';
+    var title = 'Welcome'; // inital page title for "login" screen
     return {
       getTitle: function() { // call from the view
         return title;
@@ -31,6 +33,9 @@ angular.module('appServices', ['ngResource'])
       },
       setUser: function(user) {
         sessionStorage.setItem('currentUser',  JSON.stringify(user));
+      },
+      clear: function() {
+        sessionStorage.removeItem('currentUser');
       }
     };
   })

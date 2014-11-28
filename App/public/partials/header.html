@@ -1,9 +1,11 @@
 <div id="header-container">
   <header id="appHeader" class="" ng-controller="HeaderCtrl">
     <a class="" href="" ng-click="$spMenu.toggle()">
-      <span class="icon">&#9776;</span>
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+        <i class="fa fa-bars fa-stack-1x fa-inverse fa-fw"></i>
+      </span>
     </a>
     <h1>{{PageTitle.getTitle()}}</h1>
   </header>
 </div><!-- end #header-container -->
-<div id="container" ng-view></div>
