@@ -2,30 +2,35 @@
 <html lang="en" ng-app="myApp">
     <head>
       <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
       <title>Activities</title>
       <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="/stylesheets/ng-mobile-menu.css" />
       <link rel="stylesheet" href="/stylesheets/style.css" />
       <link rel="stylesheet" href="/font/font-awesome/css/font-awesome.min.css">
-      <link rel="stylesheet" href="/stylesheets/ng-mobile-menu.min.css" />
+
     </head>
     <body>
-      <div id="sp-nav" class="nav">
-        <div ng-include src="'partials/menu.html'"></div>
-      </div>
+      <div id="wrap-all">
+        <div id="sp-nav" class="nav">
+          <div ng-include src="'partials/menu.html'"></div>
+        </div>
 
-      <div id="sp-page">
-        <div ng-include src="'partials/header.html'"></div>
+        <div id="sp-page">
+          <div ng-include src="'partials/header.html'"></div>
 
           <div id="container">
             <div ng-view></div>
           </div>
 
 
+        </div>
       </div>
 
       <!-- <div id="map" style="width: 100%; height: 400px;"></div> -->
     </body>
-      <script src="/js/lib/angular/angular.js"></script>
+      <!-- <script src="/js/lib/angular/angular.js"></script> -->
+      <script src="https://code.angularjs.org/snapshot/angular.js"></script>
       <script src="/js/lib/angular/angular-route.js"></script>
       <script src="/js/lib/angular/angular-resource.js"></script>
       <script src="/js/lib/angular/ng-mobile-menu.min.js"></script>

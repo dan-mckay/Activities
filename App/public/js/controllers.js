@@ -18,7 +18,8 @@ angular.module('appControllers', [
     }
   })
   .controller('RootCtrl', function($scope, $location, User, CurrentUser, PageTitle) {
-    PageTitle.setTitle('FUCK');
+    PageTitle.setTitle('Welcome');
+    $("#appHeader").addClass('hidden');
     $scope.welcome = "COME ON IN!";
     $scope.go = function(path) {
       $location.path(path);
@@ -26,6 +27,7 @@ angular.module('appControllers', [
   })
   .controller('DashCtrl', function($scope, $location, User, CurrentUser, PageTitle) {
     PageTitle.setTitle('Dashboard');
+    $("#appHeader").removeClass('hidden');
     var user = CurrentUser.getUser();
     if(! user) {
       user = User.get(function (user) {

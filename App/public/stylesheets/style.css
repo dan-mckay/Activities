@@ -54,6 +54,7 @@ a {
 
 
 /*-----------------GENERAL----------------*/
+
 #sp-page {
   background-color: white;
   color: #000;
@@ -131,6 +132,10 @@ dd {
   float: left;
 }
 
+.hidden {
+  visibility: hidden
+}
+
 /*-----------------TYPOGRAPHY----------------*/
 body {
   font-family: 'Lato', sans-serif;
@@ -159,6 +164,10 @@ h1 {
 }
 #sp-nav a {
   color: #343434;
+}
+
+#wrap-all {
+  -webkit-transform:translate3d(0,0,0);
 }
 
 /*----------------- HEADER ----------------*/
