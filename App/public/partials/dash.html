@@ -1,7 +1,18 @@
-<div>
-  <p>{{ user.first_name }}</p>
-  <p>{{ user.last_name }}</p>
+<div id="dashboard">
+  <h1>User</h1>
+  <p>
+    <img src="{{ user.avatar }}" alt="" />
+  </p>
+  <p>{{ user.name }}</p>
+  <p>{{ user.address }}</p>
   <p>{{ user.city }}</p>
   <p>{{ user.country }}</p>
-  this is the dash partial
+  <p>{{ user.email }}</p>
+  <p>{{ user.member_since }}</p>
+
+  <h1>Stats</h1>
+  <p>{{ stats.avgMovingSpeed }}</p>
+  <p>{{ stats.avgHeartBeat }}</p>
+  <p>{{ stats.totalCalsBurned }}</p>
+  <p>{{ stats.totalDistCovered }}</p>
 </div>

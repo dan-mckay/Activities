@@ -27,7 +27,7 @@ module.exports = function(callback) {
     },
 
     avgMovingSpeed: function(cb) {
-      activityModel.aggregate( { $group: { _id: "$activityType", avMovSpeed: { $avg: "$aveMovingSpeedRaw" } } }, function (err, result) {
+      activityModel.aggregate( { $group: { _id: "$activityType", avgMovingSpeed: { $avg: "$aveMovingSpeedRaw" } } }, function (err, result) {
         if(err) {
           return callback(err, null);
         }
@@ -36,7 +36,7 @@ module.exports = function(callback) {
     },
 
     avgHeartBeat: function(cb) {
-      activityModel.aggregate( { $group: { _id: "$activityType", aveHeartRate: { $avg: "$aveHeartRate" } } }, function (err, result) {
+      activityModel.aggregate( { $group: { _id: "$activityType", avgHeartBeat: { $avg: "$aveHeartRate" } } }, function (err, result) {
         if(err) {
           return callback(err, null);
         }

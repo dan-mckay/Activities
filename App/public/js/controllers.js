@@ -11,7 +11,6 @@ angular.module('appControllers', [
   .controller('MenuCtrl', function($scope, $location, MenuItems) {
     $scope.menuItems = MenuItems;
     $scope.go = function(path, $spMenu) {
-      //if(path == "/user details") path = "user";
       $location.path(path);
       console.log(path);
       $spMenu.hide();
@@ -25,16 +24,51 @@ angular.module('appControllers', [
       $location.path(path);
     }
   })
-  .controller('DashCtrl', function($scope, $location, User, CurrentUser, PageTitle) {
+  .controller('DashCtrl', function($scope, $location, User, CurrentUser, Stats, StatsCache, CalcStats, PageTitle) {
+    console.log('DashCtrl called');
+    var stats = {};
     PageTitle.setTitle('Dashboard');
     $("#appHeader").removeClass('hidden');
     var user = CurrentUser.getUser();
+    console.log('User from sessionStorage', user);
     if(! user) {
-      user = User.get(function (user) {
+      User.get(function(data) {
+        user = data
         CurrentUser.setUser(user);
+        $scope.user = user;
+        getAppStats();
       });
     }
-    $scope.user = user;
+    else {
+      $scope.user = user;
+      getAppStats();
+    }
+
+    function getAppStats() {
+      var appStats = StatsCache.get('stats');
+      console.log('appStats 1', appStats);
+      if(! appStats) {
+        Stats.get(function(data) {
+          console.log('appStats 2', appStats);
+          appStats = data;
+          StatsCache.put('stats', appStats);
+          setStatsforDash(appStats);
+        });
+      }
+      else {
+        console.log('appStats 3', appStats);
+        setStatsforDash(appStats);
+      }
+    }
+
+    function setStatsforDash(appStats) {
+      stats.activityCount = appStats.activityCount;
+      stats.avgMovingSpeed = CalcStats.getAverage(appStats, "avgMovingSpeed");
+      stats.avgHeartBeat = CalcStats.getAverage(appStats, "avgHeartBeat");
+      stats.totalCalsBurned = CalcStats.getTotal(appStats, "calsBurned");
+      stats.totalDistCovered = CalcStats.getTotal(appStats, "totalDistCovered");
+      $scope.stats = stats;
+    }
   })
   .controller('ActivitiesCtrl', function($scope, $location, PageTitle, PageTitle) {
     PageTitle.setTitle('Activities');

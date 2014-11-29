@@ -166,9 +166,6 @@ h1 {
   color: #343434;
 }
 
-#wrap-all {
-  -webkit-transform:translate3d(0,0,0);
-}
 
 /*----------------- HEADER ----------------*/
 #header-container {

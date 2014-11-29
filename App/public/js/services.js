@@ -43,7 +43,10 @@ angular.module('appServices', ['ngResource'])
     return $resource(APIBaseUrl + '/user');
   }])
   .factory('Stats', ['$resource', 'APIBaseUrl', function($resource, APIBaseUrl) {
-    return $resource(APIBaseUrl + 'stats');
+    return $resource(APIBaseUrl + '/stats');
+  }])
+  .factory('StatsCache', ['$cacheFactory', function($cacheFactory) {
+    return $cacheFactory('stats');
   }])
   .factory('Activities', ['$resource', 'APIBaseUrl', function($resource, APIBaseUrl) {
     return $resource(APIBaseUrl + '/activities/:activityID');
@@ -53,4 +56,42 @@ angular.module('appServices', ['ngResource'])
   }])
   .factory('Map', ['$resource', 'APIBaseUrl', function($resource, APIBaseUrl) {
     return $resource(APIBaseUrl + '/map/:activityID');
-  }]);
+  }])
+  .factory('CalcStats', function() {
+    return {
+      getAverage: function(objArr, propName) {
+        console.log("objArr[propName]", objArr[propName]);
+        var sum = 0, count = 0;
+        objArr[propName].forEach(function(activity) {
+          console.log("activity[propName]", activity[propName]);
+          sum += activity[propName];
+          count ++;
+        });
+        return roundToTwo(sum / count);
+      },
+
+      getTotal: function(objArr, propName) {
+        var sum = 0;
+        objArr[propName].forEach(function(activity) {
+          sum += activity[propName];
+        });
+        return roundToTwo(sum);
+      },
+
+      getMaximum: function(objArr, propName) {
+        var max = 0, maxObj = {};
+        objArr[propName].forEach(function(activity) {
+          if(activity[propName] > max) {
+            max = activity[propName];
+            maxObj._id = activity._id;
+            maxObj[propName] = roundToTwo(max);
+          }
+        });
+        return maxObj;
+      }
+    }
+
+    function roundToTwo(num) {
+      return +(Math.round(num + "e+2")  + "e-2");
+    }
+  });

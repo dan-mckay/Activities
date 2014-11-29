@@ -3,7 +3,7 @@
  */
 var path = require('path')
 var fs = require('fs');
-var casual = require('casual');
+var faker = require('faker');
 var activityModel = require('../models/activityModel').createModel();
 var stats = require('../lib/stats');
 
@@ -14,16 +14,15 @@ module.exports = function(app) {
   app.get( '/api/user', function(req, res)  {
     // Generate some dummy data for a user
     var user = {
-      "first_name": casual.first_name,
-      "last_name": casual.last_name,
-      "city": casual.city,
-      "country": casual.country,
-      "address": casual.address,
-      "url": casual.url,
-      "email": casual.email,
-      "member_since": casual.unix_time
+      "name": faker.name.findName(),
+      "city": faker.address.city(),
+      "country": faker.address.country(),
+      "address": faker.address.streetAddress(),
+      "avatar": faker.internet.avatar(),
+      "email": faker.internet.email(),
+      "member_since": faker.date.recent()
     }
-    res.json(user);
+    res.send(user);
   });
 
   app.get( '/api/stats', function(req, res)  {
