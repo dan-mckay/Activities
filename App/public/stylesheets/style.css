@@ -60,76 +60,29 @@ a {
   color: #000;
 }
 #container {
-  margin: 50px auto 0 auto;
-  padding: 10px;
-  width: 100%;
+  margin: 57px auto 0 auto;
+  padding: 0px;
   content: auto;
-}
-.scroll-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   width: 100%;
-  text-align: left;
-  white-space: nowrap;
-}
-.scroll-list-item {
-  padding: 15px;
-  overflow: hidden;
-  border-bottom: 1px solid #ccc;
-  background: #fafafa;
-  font-size: 1em;
-}
-.scroll-list a {
-  color: #343434;
-}
-.elipsis {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: block;
-  overflow: hidden;
-}
-.titleCont {
-  font-size: 1.05em;
-  padding: 10px;
-  color: #343434;
-  background: #ecebe7;
-}
-.titleCont p {
-  margin-bottom: 10px
-}
-.titleCont p:last-child {
-  margin-bottom: 0px
-}
-.grey {
-  background: #6b6b6b;
-}
-.red {
-  background: #e75d5c;
-}
-.green {
-  background: #5be55b;
-}
-.tabular {
-  padding: 10px;
-}
-dt {
-  font-weight: bold;
-  display: inline-block;
-  width: 100%;
-  color: #6b6b6b;
-  margin: 0.3em 0;
 }
 
-dd {
-  margin: 0.3em 0;
-  padding: 0 0 0.5em 0;
-  font-size: 1.1em;
-  border-bottom: 1px solid #e75d5c;
-  color: #343434;
+.circular-img {
+  border-radius: 50%;
+  background-size: cover;
+  /* this class needs to be used with another that specifies the height and width, see below */
 }
+
+.img-sml {
+  height: 80px;
+  width: 80px;
+}
+
 .left {
   float: left;
+}
+
+.right {
+  float: right;
 }
 
 .hidden {
@@ -143,6 +96,9 @@ body {
 }
 h1 {
   font-size: 1.3em;
+}
+h2 {
+  font-size: 1.2em;
 }
 .capitalise {
   text-transform: capitalize;
@@ -194,8 +150,6 @@ header h1 {
   margin-left: 2.75em;
 }
 
-/*-----------------ACCOUNTS LIST SCREEN----------------*/
-
 .welcome-btn-container {
   position: fixed;
   top: 50%;
@@ -213,9 +167,26 @@ header h1 {
   color: #fff;
 }
 
-/*.welcome-btn-container h4 {
+/*----------------- DASHBOARD ----------------*/
+
+#dashboard .circular-img {
+  border: 3px solid #fff;
+}
+
+.dash-user {
+  background: #bdc3c7;
+  padding: 10px;
+  overflow: auto;
+  color: #fff;
+}
+
+.dash-user h2 {
   font-weight: 300;
-}*/
+}
+
+.text-only-container {
+   clear: both;
+}
 
 /*-----------------ACCOUNTS LIST SCREEN----------------*/
 .acc-li {

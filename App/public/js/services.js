@@ -43,13 +43,20 @@ angular.module('appServices', ['ngResource'])
     return $resource(APIBaseUrl + '/user');
   }])
   .factory('Stats', ['$resource', 'APIBaseUrl', function($resource, APIBaseUrl) {
-    return $resource(APIBaseUrl + '/stats');
-  }])
-  .factory('StatsCache', ['$cacheFactory', function($cacheFactory) {
-    return $cacheFactory('stats');
+    return $resource(APIBaseUrl + '/stats', {}, {
+      list : {
+        method : 'GET',
+        cache : true
+      }
+    });
   }])
   .factory('Activities', ['$resource', 'APIBaseUrl', function($resource, APIBaseUrl) {
-    return $resource(APIBaseUrl + '/activities/:activityID');
+    return $resource(APIBaseUrl + '/activities/:activityID', {}, {
+      list : {
+        method : 'GET',
+        cache : true
+      }
+    });
   }])
   .factory('ActivitiesCache', ['$cacheFactory', function($cacheFactory) {
     return $cacheFactory('activities');
@@ -60,10 +67,8 @@ angular.module('appServices', ['ngResource'])
   .factory('CalcStats', function() {
     return {
       getAverage: function(objArr, propName) {
-        console.log("objArr[propName]", objArr[propName]);
         var sum = 0, count = 0;
         objArr[propName].forEach(function(activity) {
-          console.log("activity[propName]", activity[propName]);
           sum += activity[propName];
           count ++;
         });
@@ -93,5 +98,15 @@ angular.module('appServices', ['ngResource'])
 
     function roundToTwo(num) {
       return +(Math.round(num + "e+2")  + "e-2");
+    }
+  })
+  .factory('CalcActivities', function() {
+    return {
+      orderByNumDesc: function(activities, propName, numReq) {
+        activities.sort(function(val1, val2) {
+          return val2[propName] - val1[propName];
+        });
+        return activities.slice(0, numReq);
+      }
     }
   });

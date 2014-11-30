@@ -23,51 +23,47 @@ angular.module('appControllers', [
     $scope.go = function(path) {
       $location.path(path);
     }
-  })
-  .controller('DashCtrl', function($scope, $location, User, CurrentUser, Stats, StatsCache, CalcStats, PageTitle) {
-    console.log('DashCtrl called');
-    var stats = {};
-    PageTitle.setTitle('Dashboard');
-    $("#appHeader").removeClass('hidden');
+    // Get from session storage if it is there
     var user = CurrentUser.getUser();
-    console.log('User from sessionStorage', user);
     if(! user) {
       User.get(function(data) {
         user = data
         CurrentUser.setUser(user);
         $scope.user = user;
-        getAppStats();
       });
     }
     else {
       $scope.user = user;
-      getAppStats();
     }
+
+  })
+  .controller('DashCtrl', function($scope, $location, User, CurrentUser, Stats, CalcStats, CalcActivities, Activities,  PageTitle) {
+    PageTitle.setTitle('Dashboard');
+    $("#appHeader").removeClass('hidden');
+    // Get from session storage if it is there
+    $scope.user = CurrentUser.getUser();
+
+    getAppStats();
+    getActivities();
 
     function getAppStats() {
-      var appStats = StatsCache.get('stats');
-      console.log('appStats 1', appStats);
-      if(! appStats) {
-        Stats.get(function(data) {
-          console.log('appStats 2', appStats);
-          appStats = data;
-          StatsCache.put('stats', appStats);
-          setStatsforDash(appStats);
-        });
-      }
-      else {
-        console.log('appStats 3', appStats);
-        setStatsforDash(appStats);
-      }
+      var stats = {};
+      Stats.get(function(data) {
+        stats.activityCount = data.activityCount;
+        stats.avgMovingSpeed = CalcStats.getAverage(data, "avgMovingSpeed");
+        stats.avgHeartBeat = CalcStats.getAverage(data, "avgHeartBeat");
+        stats.totalCalsBurned = Math.round(CalcStats.getTotal(data, "calsBurned"));
+        stats.totalDistCovered = CalcStats.getTotal(data, "totalDistCovered");
+        stats.totalTimeMoving = CalcStats.getTotal(data, "totalTimeMoving");
+        stats.totalTime = CalcStats.getTotal(data, "totalTime");
+        $scope.stats = stats;
+      });
     }
 
-    function setStatsforDash(appStats) {
-      stats.activityCount = appStats.activityCount;
-      stats.avgMovingSpeed = CalcStats.getAverage(appStats, "avgMovingSpeed");
-      stats.avgHeartBeat = CalcStats.getAverage(appStats, "avgHeartBeat");
-      stats.totalCalsBurned = CalcStats.getTotal(appStats, "calsBurned");
-      stats.totalDistCovered = CalcStats.getTotal(appStats, "totalDistCovered");
-      $scope.stats = stats;
+    function getActivities() {
+      Activities.query(function(data) {
+        $scope.activities = CalcActivities.orderByNumDesc(data, "beginTimeRaw", 5);
+      });
     }
   })
   .controller('ActivitiesCtrl', function($scope, $location, PageTitle, PageTitle) {

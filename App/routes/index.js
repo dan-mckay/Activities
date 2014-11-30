@@ -28,7 +28,6 @@ module.exports = function(app) {
   app.get( '/api/stats', function(req, res)  {
     stats(function(err, result) {
       if(err) res.send(500);
-      console.log('result', result)
       res.send(result);
     });
   });
