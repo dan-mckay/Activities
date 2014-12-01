@@ -1,11 +1,10 @@
 <div id="dashboard">
   <div class="dash-user">
     <div class="circular-img img-sml left" ng-style="{'background-image':'url({{ user.avatar }})'}"></div>
-    <div class="right">
-      <h2>{{ user.name }}</h2>
+    <h2 class="text-right">{{ user.name }}</h2>
+    <div class="dash-btm-right">
       <p>Activity Count: {{ stats.activityCount }}</p>
     </div>
-
   </div>
   <div class="text-only-container">
     <div class="text-only">
