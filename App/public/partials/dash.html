@@ -6,30 +6,32 @@
       <p>Activity Count: {{ stats.activityCount }}</p>
     </div>
   </div>
-  <div class="text-only-container">
-    <div class="text-only">
-      <p>Calories Burned</p>
-      <p>{{ stats.totalCalsBurned }}</p>
+  <div class="dash-stats-container">
+    <div class="text-only-container">
+      <div class="text-only left">
+        <p>Calories Burned</p>
+        <p>{{ stats.totalCalsBurned }}</p>
+      </div>
+      <div class="text-only right text-right">
+        <p>Distance Covered</p>
+        <p>{{ stats.totalDistCovered }}km</p>
+      </div>
     </div>
-    <div class="text-only">
-      <p>Distance Covered</p>
-      <p>{{ stats.totalDistCovered }}</p>
+    <div class="bar-chart">
+      Bar Chart Here
     </div>
-  </div>
-  <div class="bar-chart">
-    Bar Chart Here
-  </div>
-  <div class="icon-box-small">
-    <i class="fa fa-rocket"></i>
-    <p>Average Speed</p>
-    <p>{{ stats.avgMovingSpeed }} km/h</p>
-  </div>
-  <div class="icon-box-small">
-    <i class="fa fa-heart"></i>
-    <p>Average Heart Rate</p>
-    <p>{{ stats.avgHeartBeat }}</p>
-  </div>
-  <div class="pie-chart">
-    Pie Chart Here
+    <div class="icon-box-small">
+      <i class="fa fa-rocket"></i>
+      <p>Average Speed</p>
+      <p>{{ stats.avgMovingSpeed }} km/h</p>
+    </div>
+    <div class="icon-box-small">
+      <i class="fa fa-heart"></i>
+      <p>Average Heart Rate</p>
+      <p>{{ stats.avgHeartBeat }}</p>
+    </div>
+    <div class="pie-chart">
+      Pie Chart Here
+    </div>
   </div>
 </div>
