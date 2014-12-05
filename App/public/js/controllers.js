@@ -17,6 +17,7 @@ angular.module('appControllers', [
     }
   })
   .controller('RootCtrl', function($scope, $location, User, CurrentUser, PageTitle) {
+
     PageTitle.setTitle('Welcome');
     $("#appHeader").addClass('hidden');
     $scope.welcome = "COME ON IN!";
@@ -56,6 +57,7 @@ angular.module('appControllers', [
         stats.totalDistCovered = CalcStats.getTotal(data, "totalDistCovered");
         stats.totalTimeMoving = CalcStats.getTotal(data, "totalTimeMoving");
         stats.totalTime = CalcStats.getTotal(data, "totalTime");
+        alert(stats.totalTime);
         $scope.stats = stats;
       });
     }
